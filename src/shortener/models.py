@@ -32,7 +32,7 @@ class KirrURL(models.Model):
     active = models.BooleanField(default=True)
 
     objects = KirrURLManager()
-    some_random = KirrURLManager()
+    # some_random = KirrURLManager()
 
     def save(self, *args, **kwargs):
         if self.shortcode is None or self.shortcode == "":
