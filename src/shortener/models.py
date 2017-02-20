@@ -29,7 +29,7 @@ class KirrURLManager(models.Manager):
 
 class KirrURL(models.Model):
     ''' Model for url-shourtener'''
-    url = models.CharField(max_length=220, validators=[validate_url])
+    url = models.CharField(max_length=220) #, validators=[validate_url])
     shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -16,6 +16,6 @@ def validate_url(value):
         url_validator(value_2_url)
     except:
         value_2_invalid = True
-        if value_1_invalid is False and value_2_invalid is False:
+        if value_1_invalid is True and value_2_invalid is True:
             raise ValidationError('Invalid url for this field')
     return value
