@@ -6,8 +6,8 @@ from shortener.models import KirrURL
 class ClickEventManager(models.Manager):
 
     def create_event(self, instance):
-        if isinstance(KirrURL, instance):
-            obj, created = self.objects.get_or_create(kirr_url=instance)
+        if isinstance(instance, KirrURL):
+            obj, created = self.get_or_create(kirr_url=instance)
             obj.count += 1
             obj.save()
             return obj.count
@@ -23,4 +23,4 @@ class ClickEvent(models.Model):
     objects = ClickEventManager()
 
     def __str__(self):
-        return '{i}'.format(self.count)
+        return '{i}'.format(i=self.count)
