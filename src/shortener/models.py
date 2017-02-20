@@ -3,6 +3,10 @@ from django.db import models
 from .utils import create_shortcode
 from django.conf import settings
 
+from django_hosts.resolvers import reverse
+
+from .validators import validate_url
+
 SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX', 15)
 
 
@@ -25,7 +29,7 @@ class KirrURLManager(models.Manager):
 
 class KirrURL(models.Model):
     ''' Model for url-shourtener'''
-    url = models.CharField(max_length=220, )
+    url = models.CharField(max_length=220, validators=[validate_url])
     shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -41,3 +45,7 @@ class KirrURL(models.Model):
 
     def __str__(self):
         return str(self.url)
+
+    def get_short_url(self):
+        url_path = reverse('scode', kwargs={'shortcode': self.shortcode}, host='www', scheme='http')
+        return url_path
